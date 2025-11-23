@@ -37,7 +37,7 @@ loader.load(
     model = gltf.scene;
 
     // Regola scala/posizione/rotazione iniziale a piacere
-    model.scale.set(0.2, 0.2, 0.2);        // se è troppo grande/piccolo, prova 0.1 o 2
+    model.scale.set(0.5, 0.5, 0.5);        // se è troppo grande/piccolo, prova 0.1 o 2
     model.position.set(0, 0, 0);     // centro
     model.rotation.set(0, 0, 0);     // nessuna rotazione iniziale
 
@@ -121,5 +121,6 @@ function animate() {
 }
 
 animate();
+
 
 
