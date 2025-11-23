@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Hero 3D Scroll</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Three.js + GLTFLoader in locale, versione r147 -->
+  <script src="js/three.min.js"></script>
+  <script src="js/GLTFLoader.js"></script>
+</head>
+<body>
+  <div id="hero">
+    <!-- Three.js inserirà qui il canvas -->
+    <div class="hero-overlay">
+      <h1>La tua scritta in sovraimpressione</h1>
+    </div>
+  </div>
+
+  <!-- Contenuto sottostante per poter scrollare -->
+  <section class="content">
+    <h2>Sezione contenuti</h2>
+    <p>
+      Qui ci metti il resto del sito. Continua a scorrere per vedere
+      il modello ruotare e il testo che sparisce.
+    </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+    <p>Altro testo, immagini, ecc.</p>
+    <p style="margin-bottom: 100vh;">Spazio extra per mostrare lo scroll.</p>
+  </section>
+
+  <!-- Il tuo script principale (NON più type="module") -->
+  <script src="main.js"></script>
+</body>
+</html>
