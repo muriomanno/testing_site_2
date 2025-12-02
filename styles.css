@@ -47,6 +47,8 @@ body {
   pointer-events: none;  /* il mouse passa attraverso */
   z-index: 1;
   transition: opacity 0.2s linear; /* rende lo svanire più morbido */
+  flex-direction: column;
+  gap: 12px;
 }
 
 .hero-overlay h1 {
@@ -72,3 +74,4 @@ body {
   max-width: 60ch;
   line-height: 1.6;
 }
+
