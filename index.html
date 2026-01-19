@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>404 - Pagina non trovata | RND Group</title>
+
+  <!-- Model Viewer (Google) -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <style>
+    :root{
+      --bg1:#041b2d;
+      --bg2:#0a3a5a;
+      --text:#ffffff;
+      --muted:rgba(255,255,255,.75);
+      --glass:rgba(255,255,255,.08);
+      --glass2:rgba(255,255,255,.12);
+      --shadow:rgba(0,0,0,.35);
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 30% 20%, var(--bg2) 0%, var(--bg1) 60%);
+      overflow:hidden;
+    }
+
+    /* Subtle pattern */
+    .bg-grid{
+      position:fixed;
+      inset:0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity:.18;
+      pointer-events:none;
+    }
+
+    .wrap{
+      position:relative;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    .card{
+      position:relative;
+      width:min(1100px, 100%);
+      height:min(620px, 100%);
+      border-radius:24px;
+      background: linear-gradient(180deg, var(--glass2), var(--glass));
+      box-shadow: 0 20px 60px var(--shadow);
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+    }
+
+    /* 3D layer behind the text */
+    .model-layer{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      opacity:.85;
+      filter: drop-shadow(0 30px 40px rgba(0,0,0,.35));
+    }
+
+    model-viewer{
+      width:100%;
+      height:100%;
+      background:transparent;
+      /* Make it "behind" the text and slightly offset */
+      transform: translateY(20px);
+    }
+
+    /* Text layer on top */
+    .content{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      padding: clamp(20px, 4vw, 48px);
+    }
+
+    .topbar{
+      position:absolute;
+      top:20px;
+      left:24px;
+      right:24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      z-index:3;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:700;
+      letter-spacing:.2px;
+      color:rgba(255,255,255,.9);
+      user-select:none;
+    }
+
+    .pill{
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(0,0,0,.25);
+      border:1px solid rgba(255,255,255,.14);
+      color:rgba(255,255,255,.9);
+      font-size:14px;
+      user-select:none;
+    }
+
+    .code{
+      font-size: clamp(84px, 12vw, 160px);
+      line-height: .9;
+      margin:0;
+      font-weight:900;
+      letter-spacing:-3px;
+      text-shadow: 0 18px 50px rgba(0,0,0,.45);
+      position:relative;
+      display:inline-block;
+      width: fit-content;
+    }
+
+    /* Slight “cutout” effect so the model feels behind */
+    .code::after{
+      content:"";
+      position:absolute;
+      inset:-12px -14px;
+      background: radial-gradient(closest-side, rgba(0,0,0,.18), transparent 70%);
+      filter: blur(10px);
+      z-index:-1;
+    }
+
+    .title{
+      margin:14px 0 0;
+      font-size: clamp(18px, 2.2vw, 28px);
+      font-weight:700;
+      max-width: 52ch;
+      text-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .desc{
+      margin:10px 0 0;
+      max-width: 68ch;
+      color:var(--muted);
+      font-size: clamp(14px, 1.4vw, 16px);
+      line-height:1.55;
+      text-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .actions{
+      margin-top:22px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.95);
+      padding: 12px 14px;
+      border-radius: 14px;
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.14);
+      border-color: rgba(255,255,255,.25);
+    }
+
+    .btn.primary{
+      background: rgba(255,255,255,.18);
+      border-color: rgba(255,255,255,.28);
+    }
+
+    .footer{
+      position:absolute;
+      bottom:18px;
+      left:24px;
+      right:24px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      color: rgba(255,255,255,.65);
+      font-size: 13px;
+      z-index:3;
+      user-select:none;
+    }
+
+    .hint{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .kbd{
+      padding:6px 10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.22);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12px;
+      color: rgba(255,255,255,.85);
+    }
+
+    /* Responsive: reduce model opacity a bit on small screens for readability */
+    @media (max-width: 520px){
+      .model-layer{ opacity:.70; }
+      .pill{ display:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-grid"></div>
+
+  <div class="wrap">
+    <div class="card" role="main" aria-label="Pagina 404">
+
+      <div class="topbar">
+        <div class="brand">
+          RND Group
+        </div>
+        <div class="pill">Pagina non trovata</div>
+      </div>
+
+      <!-- 3D model layer (behind text) -->
+      <div class="model-layer" aria-hidden="true">
+        <model-viewer
+          id="mv"
+          src="model.glb"
+          camera-controls
+          disable-zoom
+          disable-pan
+          interaction-prompt="none"
+          exposure="1.05"
+          shadow-intensity="0.25"
+          environment-image="neutral"
+          autoplay
+        ></model-viewer>
+      </div>
+
+      <!-- Text on top -->
+      <div class="content">
+        <h1 class="code">404</h1>
+        <p class="title">Questa pagina non esiste (o è stata spostata).</p>
+        <p class="desc">
+          Puoi tornare alla home oppure visitare la pagina “Lavori”.
+          Se pensi sia un errore, contattaci e indicaci l’indirizzo che stavi aprendo.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="/index.html">Torna alla Home</a>
+          <a class="btn" href="/works.html">Vai a Lavori</a>
+          <a class="btn" href="mailto:info@rndgroup.it?subject=Segnalazione%20404%20-%20RND%20Group&amp;body=Buongiorno%2C%0Aho%20trovato%20una%20pagina%20non%20raggiungibile.%0AURL%3A%20" id="mailBtn">Contattaci</a>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="hint">
+          <span class="kbd">Esc</span> torna indietro
+          <span class="kbd">H</span> home
+        </div>
+        <div>© 2026 RND Group S.p.A.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Smooth rotation of the model (keeps running even without user interaction)
+    const mv = document.getElementById("mv");
+    let t0 = performance.now();
+
+    function animate(now){
+      const dt = (now - t0) / 1000;
+      t0 = now;
+
+      // Rotate around Y axis: adjust speed here (radians per second)
+      const speed = 0.35;
+      const current = mv.getAttribute("camera-orbit") || "0deg 75deg 3.2m";
+
+      // Parse the first value (theta) if present, else start from 0
+      let thetaDeg = 0;
+      const match = String(current).match(/^([-\d.]+)deg\s+([-\d.]+)deg\s+(.+)$/);
+      if (match){
+        thetaDeg = parseFloat(match[1]) || 0;
+      }
+      thetaDeg = (thetaDeg + speed * dt * (180 / Math.PI)) % 360;
+
+      // Keep a stable view; tweak these two for your truck model
+      const phiDeg = 75;      // elevation
+      const radius = "3.2m";  // distance
+
+      mv.setAttribute("camera-orbit", `${thetaDeg}deg ${phiDeg}deg ${radius}`);
+      requestAnimationFrame(animate);
+    }
+
+    // Keyboard shortcuts
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") history.back();
+      if (e.key.toLowerCase() === "h") window.location.href = "/index.html";
+    });
+
+    // Append current URL to email body automatically
+    const mailBtn = document.getElementById("mailBtn");
+    mailBtn.addEventListener("click", () => {
+      const base = "mailto:info@rndgroup.it?subject=Segnalazione%20404%20-%20RND%20Group&amp;body=Buongiorno%2C%0Aho%20trovato%20una%20pagina%20non%20raggiungibile.%0AURL%3A%20";
+      mailBtn.setAttribute("href", base + encodeURIComponent(window.location.href));
+    }, { once: true });
+  </script>
+</body>
+</html>
